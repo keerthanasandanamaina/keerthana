@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
+// src/App.tsx
+import React, { useEffect, useState, useRef } from 'react';
 import { Box, Flex, Text as ChakraText, Tooltip, Icon } from '@chakra-ui/react';
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
@@ -7,6 +8,8 @@ import Projects from "./components/Projects/Projects";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
 import Contact from './components/Contact/Contact';
+
+// Firebase Imports
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
@@ -16,18 +19,24 @@ function App() {
   const pageBackgroundColor = "#1A202C";
   const pagePrimaryTextColor = "#E2E8F0";
   const secondaryTextColor = "#A0AEC0";
+  const accentColor = "#63B3ED";
 
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
-  const [db, setDb] = useState<any>(null);
-  const [auth, setAuth] = useState<any>(null);
-  const [appId, setAppId] = useState<string>('');
-  const [activeSection, setActiveSection] = useState('');
-  const aboutRef = useRef(null);
-  const skillsRef = useRef(null);
-  const projectsRef = useRef(null);
-  const profileRef = useRef(null);
-  const contactRef = useRef(null);
+  // REMOVED: const [db, setDb] = useState<any>(null);
+  // REMOVED: const [auth, setAuth] = useState<any>(null);
+  // REMOVED: const [appId, setAppId] = useState<string>('');
 
+  const [activeSection, setActiveSection] = useState('About');
+
+  // Refs for each section
+  // MODIFIED: Explicitly type refs to HTMLDivElement
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer to track active section
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -58,13 +67,8 @@ function App() {
     };
   }, []);
 
+  // Firebase Initialization
   useEffect(() => {
-    console.log("VITE_FIREBASE_API_KEY:", import.meta.env.VITE_FIREBASE_API_KEY ? "SET" : "NOT SET");
-    console.log("VITE_FIREBASE_AUTH_DOMAIN:", import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ? "SET" : "NOT SET");
-    console.log("VITE_FIREBASE_PROJECT_ID:", import.meta.env.VITE_FIREBASE_PROJECT_ID ? "SET" : "NOT SET");
-    console.log("VITE_FIREBASE_STORAGE_BUCKET:", import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ? "SET" : "NOT SET");
-    console.log("VITE_FIREBASE_MESSAGING_SENDER_ID:", import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ? "SET" : "NOT SET");
-    console.log("VITE_FIREBASE_APP_ID:", import.meta.env.VITE_FIREBASE_APP_ID ? "SET" : "NOT SET");
     try {
       const firebaseConfig = {
         apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -75,8 +79,8 @@ function App() {
         appId: import.meta.env.VITE_FIREBASE_APP_ID,
       };
 
-      if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
-        console.error("Firebase config environment variables not fully set. Visitor tracking will not work.");
+      if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.authDomain) {
+        console.error("Firebase config environment variables not fully set (missing API Key, Project ID, or Auth Domain). Visitor tracking will not work.");
         return;
       }
 
@@ -84,9 +88,8 @@ function App() {
       const firestoreDb = getFirestore(app);
       const firebaseAuth = getAuth(app);
 
-      setDb(firestoreDb);
-      setAuth(firebaseAuth);
-      setAppId(firebaseConfig.projectId || firebaseConfig.appId);
+      // Removed: setDb(firestoreDb); setAuth(firebaseAuth); setAppId(...)
+      // firestoreDb and firebaseAuth are used directly in setupVisitorTracking
 
       const setupVisitorTracking = async () => {
         try {
@@ -122,6 +125,7 @@ function App() {
   return (
     <Box minH="100vh" bg={pageBackgroundColor} position="relative">
       <Navbar activeItem={activeSection} setActiveItem={setActiveSection} />
+
       <Tooltip label={`Visitors: ${visitorCount !== null ? visitorCount : 'Loading...'}`} hasArrow placement="bottom-end">
         <Box
           position="fixed"
@@ -148,6 +152,7 @@ function App() {
           </ChakraText>
         </Box>
       </Tooltip>
+
       <Flex
         direction="column"
         align="center"
@@ -155,11 +160,12 @@ function App() {
         pt={{ base: "100px", md: "80px", lg: "70px" }}
         color={pagePrimaryTextColor}
       >
-        <About />
-        <Skills />
-        <Projects />
-        <Profile />
-        <Contact />
+        {/* Pass ref to each section */}
+        <About ref={aboutRef} />
+        <Skills ref={skillsRef} />
+        <Projects ref={projectsRef} />
+        <Profile ref={profileRef} />
+        <Contact ref={contactRef} />
         <Footer />
       </Flex>
     </Box>
