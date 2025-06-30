@@ -1,0 +1,110 @@
+/* src/components/Contact/Contact.css */
+
+/* Define CSS Variables for common Chakra Spacing, Sizes, and Radii */
+:root {
+  --chakra-space-2: 0.5rem;   /* 8px */
+  --chakra-space-3: 0.75rem;  /* 12px */
+  --chakra-space-4: 1rem;     /* 16px */
+  --chakra-space-6: 1.5rem;   /* 24px */
+  --chakra-space-8: 2rem;     /* 32px */
+  --chakra-space-10: 2.5rem;  /* 40px */
+  --chakra-space-12: 3rem;    /* 48px */
+  --chakra-space-16: 4rem;    /* 64px */
+  --chakra-space-20: 5rem;    /* 80px */
+
+  --chakra-fontSizes-md: 1rem;     /* 16px */
+  --chakra-fontSizes-lg: 1.125rem; /* 18px */
+  --chakra-fontSizes-xl: 1.25rem;  /* 20px */
+  --chakra-fontSizes-2xl: 1.5rem;  /* 24px */
+  --chakra-fontSizes-3xl: 1.875rem;/* 30px */
+}
+
+/* Contact Section Container Styles */
+.contact-section-container {
+  padding-top: var(--chakra-space-16); /* py={{ base: 16 }} */
+  padding-bottom: var(--chakra-space-16); /* py={{ base: 16 }} */
+  max-width: var(--chakra-sizes-container-xl, 1200px); /* maxWidth="container.xl" */
+  margin-left: auto; /* mx="auto" */
+  margin-right: auto; /* mx="auto" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+
+  /* Styles for dynamic tilt effect on the section container itself */
+  transition: all 0.2s ease-in-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform, box-shadow, background, border-color;
+  transform: translateY(0) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) scale(1);
+  backface-visibility: hidden;
+  /* Add a subtle background/border to make it feel like a card/section */
+  background-color: rgba(255, 255, 255, 0.03); /* Very subtle transparent white */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Very subtle border */
+  border-radius: var(--chakra-radii-md); /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  margin-top: var(--chakra-space-10); /* Space above the section */
+  margin-bottom: var(--chakra-space-10); /* Space below the section */
+  padding-left: var(--chakra-space-4); /* px={4} for base */
+  padding-right: var(--chakra-space-4); /* px={4} for base */
+}
+
+/* Hover effect for the contact section container */
+.contact-section-container:hover {
+  background: rgba(255, 255, 255, 0.06); /* Slightly more opaque on hover */
+  border-color: rgba(255, 255, 255, 0.15); /* Slightly more visible border */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform: rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) translateZ(15px); /* Lift forward in 3D space */
+}
+
+
+/* Responsive Contact Section Padding */
+@media screen and (min-width: 48em) { /* md (768px) */
+  .contact-section-container {
+    padding-top: var(--chakra-space-20); /* py={{ md: 20 }} */
+    padding-bottom: var(--chakra-space-20); /* py={{ md: 20 }} */
+    padding-left: var(--chakra-space-8); /* px={{ md: 8 }} */
+    padding-right: var(--chakra-space-8); /* px={{ md: 8 }} */
+  }
+}
+
+/* VStack for Main Content Spacing and Alignment */
+.contact-content-stack {
+  width: 100%;
+  gap: var(--chakra-space-8); /* spacing={8} */
+}
+
+/* Main Heading (Get in Touch) Styles */
+.contact-main-heading {
+  color: var(--primary-text-color);
+}
+
+/* Responsive Main Heading Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .contact-main-heading {
+    font-size: var(--chakra-fontSizes-2xl); /* size={{ base: "2xl" }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .contact-main-heading {
+    font-size: var(--chakra-fontSizes-3xl); /* size={{ md: "3xl" }} */
+  }
+}
+
+/* Contact Email Link Styles */
+.contact-email-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove default underline */
+  transition: all 0.2s ease-in-out;
+}
+
+.contact-email-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.contact-email-link .chakra-icon {
+  margin-right: var(--chakra-space-3); /* mr={3} */
+}

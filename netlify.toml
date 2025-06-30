@@ -1,0 +1,11 @@
+# netlify.toml
+[build]
+  command = "npm run build" # Your Vite build command
+  publish = "dist"          # Your Vite output directory (where `npm run build` puts files)
+  functions = "netlify/functions" # Directory where your Netlify Functions are located
+
+# Redirects for your functions (important for the contact form)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

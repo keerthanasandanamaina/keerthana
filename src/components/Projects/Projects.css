@@ -1,0 +1,131 @@
+/* src/sections/Projects.css */
+
+/* Define CSS Variables for common Chakra Spacing, Sizes, and Radii */
+:root {
+  --chakra-space-1: 0.25rem;   /* 4px */
+  --chakra-space-2: 0.5rem;   /* 8px */
+  --chakra-space-3: 0.75rem;  /* 12px */
+  --chakra-space-4: 1rem;     /* 16px */
+  --chakra-space-8: 2rem;     /* 32px */
+  --chakra-space-10: 2.5rem;  /* 40px */
+  --chakra-space-16: 4rem;    /* 64px */
+  --chakra-space-20: 5rem;    /* 80px */
+
+  --chakra-fontSizes-md: 1rem;     /* 16px */
+  --chakra-fontSizes-lg: 1.125rem; /* 18px */
+  --chakra-fontSizes-xl: 1.25rem;  /* 20px */
+  --chakra-fontSizes-2xl: 1.5rem;  /* 24px */
+  --chakra-fontSizes-3xl: 1.875rem;/* 30px */
+}
+
+/* Projects Section Container Styles */
+.projects-section-container {
+  min-height: 100vh; /* minH="100vh" */
+  padding-top: var(--chakra-space-16); /* py={{ base: 16 }} */
+  padding-bottom: var(--chakra-space-16); /* py={{ base: 16 }} */
+  color: var(--primary-text-color); /* color={primaryTextColor} */
+  max-width: var(--chakra-sizes-container-xl, 1200px); /* maxWidth="container.xl" */
+  margin-left: auto; /* mx="auto" */
+  margin-right: auto; /* mx="auto" */
+  display: flex; /* display="flex" */
+  align-items: center; /* alignItems="center" */
+  justify-content: center; /* justifyContent="center" */
+  flex-direction: column; /* flexDirection="column" */
+  width: 100%; /* width="full" */
+}
+
+/* Responsive Projects Section Padding */
+@media screen and (min-width: 48em) { /* md (768px) */
+  .projects-section-container {
+    padding-top: var(--chakra-space-20); /* py={{ md: 20 }} */
+    padding-bottom: var(--chakra-space-20); /* py={{ md: 20 }} */
+  }
+}
+
+/* VStack for Main Content Spacing and Alignment */
+.projects-content-stack {
+  width: 100%; /* Take full width of parent */
+  padding-left: var(--chakra-space-4); /* px={4} for base */
+  padding-right: var(--chakra-space-4); /* px={4} for base */
+}
+
+/* Responsive VStack Spacing and Padding */
+@media screen and (min-width: 0em) { /* base */
+  .projects-content-stack {
+    gap: var(--chakra-space-8); /* spacing={{ base: 8 }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .projects-content-stack {
+    gap: var(--chakra-space-10); /* spacing={{ md: 10 }} */
+    padding-left: var(--chakra-space-8); /* px={{ md: 8 }} */
+    padding-right: var(--chakra-space-8); /* px={{ md: 8 }} */
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .projects-content-stack {
+    padding-left: var(--chakra-space-16); /* px={{ lg: 16 }} */
+    padding-right: var(--chakra-space-16); /* px={{ lg: 16 }} */
+  }
+}
+
+/* Main Heading (My Projects) Styles */
+.projects-main-heading {
+  color: var(--primary-text-color); /* color={primaryTextColor} */
+}
+
+/* Responsive Main Heading Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .projects-main-heading {
+    font-size: var(--chakra-fontSizes-xl); /* size={{ base: "xl" }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .projects-main-heading {
+    font-size: var(--chakra-fontSizes-2xl); /* size={{ md: "2xl" }} */
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .projects-main-heading {
+    font-size: var(--chakra-fontSizes-3xl); /* size={{ lg: "3xl" }} */
+  }
+}
+
+/* Project Card Styles */
+.project-card {
+  background-color: var(--card-bg-color, rgba(255, 255, 255, 0.05)); /* bg={cardBgColor} */
+  border: 1px solid var(--card-border-color, rgba(255, 255, 255, 0.1)); /* border={cardBorderColor} */
+  border-radius: var(--chakra-radii-md); /* borderRadius="md" */
+  padding: var(--chakra-space-6); /* p={6} */
+  box-shadow: var(--chakra-shadows-md, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px); /* boxShadow="md" */
+}
+
+/* Project Title Styles */
+.project-title {
+  color: var(--accent-color, #63B3ED); /* color={accentColor} */
+}
+
+/* Project Description Styles */
+.project-description {
+  color: var(--secondary-text-color, #A0AEC0); /* color={secondaryTextColor} */
+  font-size: var(--chakra-fontSizes-md); /* fontSize="md" */
+}
+
+/* Project Tech Stack (HStack) Styles */
+.project-tech-stack {
+  flex-wrap: wrap; /* wrap="wrap" */
+  gap: var(--chakra-space-2); /* spacing={2} */
+}
+
+/* Project Achievements List Styles */
+.project-achievements-list {
+  width: 100%; /* Ensure it takes full width within the card */
+}
+
+.project-achievements-list p {
+  line-height: 1.5; /* Adjust line height for readability */
+}

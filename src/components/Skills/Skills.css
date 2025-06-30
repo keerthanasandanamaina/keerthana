@@ -1,0 +1,193 @@
+/* src/sections/Skills.css */
+
+/* Define CSS Variables for common Chakra Spacing, Sizes, and Radii */
+:root {
+  --chakra-space-1: 0.25rem;   /* 4px */
+  --chakra-space-2: 0.5rem;   /* 8px */
+  --chakra-space-3: 0.75rem;  /* 12px */
+  --chakra-space-4: 1rem;     /* 16px */
+  --chakra-space-6: 1.5rem;   /* 24px */
+  --chakra-space-8: 2rem;     /* 32px */
+  --chakra-space-10: 2.5rem;  /* 40px */
+  --chakra-space-12: 3rem;    /* 48px */
+  --chakra-space-16: 4rem;    /* 64px */
+  --chakra-space-20: 5rem;    /* 80px */
+
+  --chakra-radii-md: 0.375rem; /* 6px */
+  --chakra-radii-full: 9999px; /* For Tag borderRadius="full" */
+
+  --chakra-fontSizes-sm: 0.875rem; /* 14px */
+  --chakra-fontSizes-md: 1rem;     /* 16px */
+  --chakra-fontSizes-lg: 1.125rem; /* 18px */
+  --chakra-fontSizes-xl: 1.25rem;  /* 20px */
+  --chakra-fontSizes-2xl: 1.5rem;  /* 24px */
+  --chakra-fontSizes-3xl: 1.875rem;/* 30px */
+}
+
+/* Projects Section Container Styles */
+.skills-section-container {
+  padding-top: var(--chakra-space-12); /* py={{ base: 12 }} */
+  padding-bottom: var(--chakra-space-12); /* py={{ base: 12 }} */
+  color: var(--primary-text-color);
+  max-width: var(--chakra-sizes-container-xl, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Responsive Projects Section Padding */
+@media screen and (min-width: 48em) { /* md (768px) */
+  .skills-section-container {
+    padding-top: var(--chakra-space-16);
+    padding-bottom: var(--chakra-space-16);
+  }
+}
+
+/* VStack for Main Content Spacing and Alignment */
+.skills-content-stack {
+  width: 100%; /* Take full width of parent */
+  /* Keep padding here for the overall stack content */
+  padding-left: var(--chakra-space-4); /* px={4} for base */
+  padding-right: var(--chakra-space-4); /* px={4} for base */
+}
+
+/* Responsive VStack Spacing and Padding */
+@media screen and (min-width: 0em) { /* base */
+  .skills-content-stack {
+    gap: var(--chakra-space-8);
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .skills-content-stack {
+    gap: var(--chakra-space-10);
+    padding-left: var(--chakra-space-8);
+    padding-right: var(--chakra-space-8);
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .skills-content-stack {
+    padding-left: var(--chakra-space-16);
+    padding-right: var(--chakra-space-16);
+  }
+}
+
+/* Main Heading (My Skills & Expertise) Styles */
+.skills-main-heading {
+  color: var(--primary-text-color);
+  /* Ensure no extra margin/padding pushing it right */
+  text-align: left; /* Explicitly align left */
+  width: 100%; /* Ensure it spans full width to align content */
+}
+
+/* Responsive Main Heading Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .skills-main-heading {
+    font-size: var(--chakra-fontSizes-xl);
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .skills-main-heading {
+    font-size: var(--chakra-fontSizes-2xl);
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .skills-main-heading {
+    font-size: var(--chakra-fontSizes-3xl);
+  }
+}
+
+/* Skill Category Card (VStack inside SimpleGrid) Styles */
+.skill-category-card {
+  /* No explicit background, will inherit from parent */
+  /* Ensure content within the card aligns to the left */
+  align-items: flex-start; /* Align content to the left within each card */
+  text-align: left; /* Ensure text within the card aligns left */
+}
+
+/* Core Competencies Heading Styles */
+.skills-core-heading {
+  color: var(--primary-text-color);
+  margin-bottom: var(--chakra-space-4);
+  text-align: left; /* Explicitly align left */
+  width: 100%; /* Ensure it spans full width to align content */
+}
+
+/* Individual Tag Styles */
+.skill-tag {
+  border-width: 1px;
+  border-radius: var(--chakra-radii-full);
+  padding-left: var(--chakra-space-4);
+  padding-right: var(--chakra-space-4);
+  padding-top: var(--chakra-space-2);
+  padding-bottom: var(--chakra-space-2);
+  font-size: var(--chakra-fontSizes-md);
+  /* Add transition for smooth hover effects */
+  transition: all 0.2s ease-in-out; /* Smooth transition for all properties */
+
+  /* Add perspective for 3D transform */
+  transform-style: preserve-3d; /* Crucial for 3D effects on children */
+  perspective: 1000px; /* Defines the depth of the 3D scene */
+  will-change: transform, box-shadow, background, border-color; /* Optimize for animation */
+
+  /* Use CSS variables for dynamic rotation */
+  /* This is the base transform, which will be updated by JS */
+  transform: translateY(0) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) scale(1);
+}
+
+/* Hover effect for skill tags */
+.skill-tag:hover {
+  /* Enhanced background change for glossy effect */
+  background: rgba(255, 255, 255, 0.25); /* More opaque white tint */
+  /* Border color change */
+  border-color: rgba(99, 179, 237, 0.9); /* Stronger blue border */
+  /* Stronger glow/shadow for glossy pop */
+  box-shadow: 0 0 15px rgba(99, 179, 237, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.6); /* More intense glow with inner highlight */
+  /* Subtle lift (scale and translateY) - rotation is now dynamic from JS */
+  /* MODIFIED: Removed static rotateX/Y from here to allow JS to control it */
+  transform: translateY(-5px) scale(1.03) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg));
+}
+
+
+/* Responsive Tag Size/Font */
+@media screen and (min-width: 48em) { /* md (768px) */
+  .skill-tag {
+    font-size: var(--chakra-fontSizes-lg);
+  }
+}
+
+/* Icon inside Tag */
+.skill-tag .chakra-icon {
+  margin-right: var(--chakra-space-1);
+}
+
+/* Adjust SimpleGrid's default behavior if needed */
+/* This targets the direct children of SimpleGrid (the VStack skill-category-card) */
+.skills-content-stack > .chakra-simple-grid {
+  /* Remove any default padding/margin that might be pushing it right */
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure HStack inside skill-category-card aligns its content */
+.skill-category-card .chakra-stack { /* This targets the HStack containing tags */
+  width: 100%; /* Ensure it takes full width of its parent VStack */
+  /* Ensure tags are always aligned to the start (left) */
+  justify-content: flex-start; /* Align left for all breakpoints */
+}
+
+/* Remove responsive justify for skill-category-card .chakra-stack if it was present */
+/* @media screen and (min-width: 48em) { */
+/* .skill-category-card .chakra-stack { */
+/* justify-content: flex-start; */
+/* } */
+/* } */

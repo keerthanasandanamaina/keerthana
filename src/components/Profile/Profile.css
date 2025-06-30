@@ -1,0 +1,212 @@
+/* src/components/Profile/Profile.css */
+
+/* Define CSS Variables for common Chakra Spacing, Sizes, and Radii */
+:root {
+  --chakra-space-1: 0.25rem;   /* 4px */
+  --chakra-space-2: 0.5rem;   /* 8px */
+  --chakra-space-3: 0.75rem;  /* 12px */
+  --chakra-space-4: 1rem;     /* 16px */
+  --chakra-space-5: 1.25rem;  /* 20px */
+  --chakra-space-6: 1.5rem;   /* 24px */
+  --chakra-space-8: 2rem;     /* 32px */
+  --chakra-space-10: 2.5rem;  /* 40px */
+  --chakra-space-12: 3rem;    /* 48px */
+  --chakra-space-16: 4rem;    /* 64px */
+  --chakra-space-20: 5rem;    /* 80px */
+
+  --chakra-fontSizes-sm: 0.875rem; /* 14px */
+  --chakra-fontSizes-md: 1rem;     /* 16px */
+  --chakra-fontSizes-lg: 1.125rem; /* 18px */
+  --chakra-fontSizes-xl: 1.25rem;  /* 20px */
+  --chakra-fontSizes-2xl: 1.5rem;  /* 24px */
+  --chakra-fontSizes-3xl: 1.875rem;/* 30px */
+
+  --chakra-radii-md: 0.375rem; /* 6px */
+
+  /* Card specific variables (reused from About) */
+  --card-bg-color: rgba(255, 255, 255, 0.05);
+  --card-border-color: rgba(255, 255, 255, 0.1);
+  --card-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+/* Profile Section Container Styles */
+.profile-section-container {
+  min-height: 100vh; /* minH="100vh" */
+  padding-top: var(--chakra-space-16); /* py={{ base: 16 }} */
+  padding-bottom: var(--chakra-space-16); /* py={{ base: 16 }} */
+  color: var(--primary-text-color); /* color={primaryTextColor} */
+  max-width: var(--chakra-sizes-container-xl, 1200px); /* maxWidth="container.xl" */
+  margin-left: auto; /* mx="auto" */
+  margin-right: auto; /* mx="auto" */
+  display: flex; /* display="flex" */
+  align-items: center; /* alignItems="center" */
+  justify-content: center; /* justifyContent="center" */
+  flex-direction: column; /* flexDirection="column" */
+  width: 100%; /* width="full" */
+}
+
+/* Responsive Profile Section Padding */
+@media screen and (min-width: 48em) { /* md (768px) */
+  .profile-section-container {
+    padding-top: var(--chakra-space-20); /* py={{ md: 20 }} */
+    padding-bottom: var(--chakra-space-20); /* py={{ md: 20 }} */
+  }
+}
+
+/* VStack for Main Content Spacing and Alignment */
+.profile-content-stack {
+  width: 100%; /* Take full width of parent */
+  padding-left: var(--chakra-space-4); /* px={4} for base */
+  padding-right: var(--chakra-space-4); /* px={4} for base */
+}
+
+/* Responsive VStack Spacing and Padding */
+@media screen and (min-width: 0em) { /* base */
+  .profile-content-stack {
+    gap: var(--chakra-space-8); /* spacing={{ base: 8 }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .profile-content-stack {
+    gap: var(--chakra-space-10); /* spacing={{ md: 10 }} */
+    padding-left: var(--chakra-space-8); /* px={{ md: 8 }} */
+    padding-right: var(--chakra-space-8); /* px={{ md: 8 }} */
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .profile-content-stack {
+    padding-left: var(--chakra-space-16); /* px={{ lg: 16 }} */
+    padding-right: var(--chakra-space-16); /* px={{ lg: 16 }} */
+  }
+}
+
+/* Main Heading (My Profile & Background) Styles */
+.profile-main-heading {
+  color: var(--primary-text-color); /* color={primaryTextColor} */
+}
+
+/* Responsive Main Heading Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .profile-main-heading {
+    font-size: var(--chakra-fontSizes-xl); /* size={{ base: "xl" }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .profile-main-heading {
+    font-size: var(--chakra-fontSizes-2xl); /* size={{ md: "2xl" }} */
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .profile-main-heading {
+    font-size: var(--chakra-fontSizes-3xl); /* size={{ lg: "3xl" }} */
+  }
+}
+
+/* Section Headings (Connect with Me, Education, etc.) */
+.profile-section-heading {
+  color: var(--accent-color, #63B3ED); /* color={accentColor} */
+}
+
+/* Responsive Section Heading Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .profile-section-heading {
+    font-size: var(--chakra-fontSizes-lg); /* size={{ base: "lg" }} */
+  }
+}
+
+/* Contact & Social Links (REMOVED FROM HERE) */
+/* .profile-contact-social { ... } */
+/* .profile-contact-link { ... } */
+/* .profile-contact-link:hover { ... } */
+/* .profile-contact-link .chakra-icon { ... } */
+
+
+/* Card Styles (used for Education entries, Leadership entries) */
+.profile-card {
+  background-color: var(--card-bg-color); /* Very subtle transparent white */
+  border: 1px solid var(--card-border-color); /* Subtle border for cards */
+  border-radius: var(--chakra-radii-md); /* borderRadius="md" */
+  padding: var(--chakra-space-6); /* p={6} */
+  box-shadow: var(--card-box-shadow); /* boxShadow="md" */
+  width: 100%; /* Ensure card takes full width of its grid column */
+  max-width: var(--chakra-sizes-container-lg, 992px); /* For centered education cards */
+  margin-left: auto; /* For centering */
+  margin-right: auto; /* For centering */
+
+  /* ADDED: Styles for dynamic tilt effect on cards */
+  transition: all 0.2s ease-in-out; /* Smooth transition for all properties */
+  transform-style: preserve-3d; /* Crucial for 3D effects on children */
+  perspective: 1000px; /* Defines the depth of the 3D scene */
+  will-change: transform, box-shadow, background, border-color; /* Optimize for animation */
+  /* Use CSS variables for dynamic rotation */
+  transform: translateY(0) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) scale(1);
+  backface-visibility: hidden; /* Helps prevent flickering during 3D transforms */
+}
+
+/* ADDED: Hover effect for cards */
+.profile-card:hover {
+  background: rgba(255, 255, 255, 0.1); /* Slightly more opaque white tint */
+  border-color: rgba(99, 179, 237, 0.6); /* Stronger blue border */
+  box-shadow: 0 0 15px rgba(99, 179, 237, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.6);
+  transform: rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) translateZ(20px); /* Lift forward in 3D space */
+}
+
+/* Education Section */
+.profile-education {
+  width: 100%;
+  gap: var(--chakra-space-6); /* spacing={6} */
+}
+
+/* Certifications Section */
+.profile-certifications {
+  width: 100%;
+  gap: var(--chakra-space-6); /* spacing={6} */
+}
+
+.profile-certification-item {
+  gap: var(--chakra-space-2); /* spacing={2} */
+  /* ADDED: Styles for dynamic tilt effect on certification items */
+  transition: all 0.2s ease-in-out; /* Smooth transition for all properties */
+  transform-style: preserve-3d; /* Crucial for 3D effects on children */
+  perspective: 1000px; /* Defines the depth of the 3D scene */
+  will-change: transform, box-shadow, background, border-color; /* Optimize for animation */
+  /* Use CSS variables for dynamic rotation */
+  transform: translateY(0) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) scale(1);
+  backface-visibility: hidden; /* Helps prevent flickering during 3D transforms */
+}
+
+/* ADDED: Hover effect for certification items */
+.profile-certification-item:hover {
+  background: rgba(255, 255, 255, 0.05); /* Very subtle background change */
+  border-color: rgba(99, 179, 237, 0.3); /* Subtle border change */
+  box-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
+  transform: rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) translateZ(10px); /* Lift forward in 3D space */
+}
+
+
+/* Leadership & Extracurricular Section */
+.profile-leadership {
+  width: 100%;
+  gap: var(--chakra-space-6); /* spacing={6} */
+}
+
+/* Responsive Leadership Grid */
+@media screen and (min-width: 0em) { /* base */
+  .profile-leadership .chakra-simple-grid {
+    gap: var(--chakra-space-6); /* spacing={{ base: 6 }} */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .profile-leadership .chakra-simple-grid {
+    gap: var(--chakra-space-8); /* spacing={{ md: 8 }} */
+  }
+}
+
+.profile-leadership .chakra-simple-grid .profile-card .chakra-stack { /* For HStack inside card for icon+heading */
+  gap: var(--chakra-space-2); /* mb={2} for spacing */
+}

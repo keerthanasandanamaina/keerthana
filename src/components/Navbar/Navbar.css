@@ -1,0 +1,275 @@
+/* src/components/Navbar.css */
+
+/* Define CSS Variables for common Chakra Spacing, Sizes, and Radii */
+:root {
+  --chakra-space-1: 0.25rem;   /* 4px */
+  --chakra-space-2: 0.5rem;   /* 8px */
+  --chakra-space-3: 0.75rem;  /* 12px */
+  --chakra-space-4: 1rem;     /* 16px */
+  --chakra-space-5: 1.25rem;  /* 20px */
+  --chakra-space-8: 2rem;     /* 32px */
+  --chakra-space-10: 2.5rem;  /* 40px */
+
+  --chakra-radii-md: 0.375rem; /* 6px */
+  --chakra-radii-2xl: 1.5rem;  /* 24px */
+  --chakra-radii-full: 9999px; /* For Image borderRadius="full" */
+
+  --chakra-fontSizes-xs: 0.75rem;  /* 12px */ /* Added for visitor count */
+  --chakra-fontSizes-sm: 0.875rem; /* 14px */
+  --chakra-fontSizes-md: 1rem;     /* 16px */
+  --chakra-fontSizes-lg: 1.125rem; /* 18px */
+  --chakra-fontSizes-xl: 1.25rem;  /* 20px */
+  --chakra-fontSizes-2xl: 1.5rem;  /* 24px */
+  --chakra-fontSizes-3xl: 1.875rem;/* 30px */
+}
+
+/* Chakra UI Breakpoints (approximate for media queries) */
+/* sm: 480px, md: 768px, lg: 992px, xl: 1280px */
+
+
+/* Main Navbar Container Styles */
+.navbar-container {
+  position: fixed;
+  top: var(--chakra-space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding-top: var(--chakra-space-4);
+  padding-bottom: var(--chakra-space-4);
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow the main Navbar items (left-content and nav-stack) to wrap */
+  z-index: var(--chakra-zIndices-sticky, 1300);
+
+  /* Glassy Effect Styles */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border-radius: var(--chakra-radii-2xl);
+}
+
+/* Responsive Navbar Container Width and Flex Direction */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-container {
+    max-width: 95%;
+    padding-left: var(--chakra-space-4);
+    padding-right: var(--chakra-space-4);
+    flex-direction: column; /* Stack name/photo/contact and nav vertically */
+    align-items: center; /* Center items when in column layout */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-container {
+    max-width: 90%;
+    padding-left: var(--chakra-space-8);
+    padding-right: var(--chakra-space-8);
+    flex-direction: row; /* Back to row on larger screens */
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 62em) { /* lg (992px) */
+  .navbar-container {
+    max-width: 85%;
+  }
+}
+
+/* NEW: Left Content (Avatar, Name, Contact) Container */
+.navbar-left-content {
+  /* Prevent wrapping on larger screens to keep it on one line */
+  flex-wrap: nowrap; /* Force no wrapping */
+  /* Allow shrinking of content to fit */
+  min-width: 0; /* Allow content to shrink below its intrinsic size */
+  /* Ensure it takes available space but doesn't push too much */
+  flex-grow: 1; /* Allow it to grow */
+  flex-basis: auto; /* Default flex-basis */
+}
+
+/* Responsive navbar-left-content spacing */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-left-content {
+    margin-bottom: var(--chakra-space-2); /* Add space below on small screens */
+    justify-content: center; /* Center content on small screens */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-left-content {
+    margin-bottom: 0; /* Remove space below on larger screens */
+    margin-right: var(--chakra-space-8); /* MODIFIED: Increased margin-right for more space */
+    justify-content: flex-start; /* Align content to start on larger screens */
+  }
+}
+
+
+/* Profile Avatar Styles */
+.profile-avatar {
+  border-radius: var(--chakra-radii-full);
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Avatar Size and Margin */
+@media screen and (min-width: 0em) { /* base */
+  .profile-avatar {
+    width: 48px; /* MODIFIED: Increased from 40px */
+    height: 48px; /* MODIFIED: Increased from 40px */
+    margin-right: var(--chakra-space-2); /* Add small margin to the right of avatar */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .profile-avatar {
+    width: 56px; /* MODIFIED: Increased from 48px */
+    height: 56px; /* MODIFIED: Increased from 48px */
+    margin-right: var(--chakra-space-3); /* mr={{ md: 3 }} */
+  }
+}
+
+
+/* Name Heading Styles */
+.navbar-name-heading {
+  color: var(--primary-text-color, #E2E8F0);
+  font-weight: bold;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Responsive Name Heading Font Size and Margin */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-name-heading {
+    font-size: var(--chakra-fontSizes-lg);
+    margin-right: var(--chakra-space-2); /* Add small margin to the right of name */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-name-heading {
+    font-size: var(--chakra-fontSizes-xl); /* Adjusted for better fit */
+    margin-right: var(--chakra-space-4); /* Add more margin to separate from contact links */
+  }
+}
+
+/* Contact Links Styles */
+.navbar-contact-links {
+  flex-wrap: wrap; /* Allow wrapping of individual contact links */
+  gap: var(--chakra-space-4); /* MODIFIED: Reduced spacing between contact items from 5 to 4 */
+  /* Ensure contact links can shrink */
+  min-width: 0; /* Allow content to shrink */
+  /* Ensure it takes remaining space but doesn't push too much */
+  flex-grow: 1; /* Allow it to grow */
+  flex-basis: auto; /* Default flex-basis */
+}
+
+/* Responsive Contact Links Display and Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-contact-links {
+    justify-content: center; /* Center on small screens */
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-contact-links {
+    justify-content: flex-start; /* Align left on larger screens */
+  }
+}
+
+.contact-link-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--secondary-text-color, #A0AEC0);
+  transition: color 0.2s ease-in-out;
+  white-space: nowrap; /* Prevent individual links from wrapping */
+}
+
+.contact-link-item:hover {
+  color: var(--accent-color, #63B3ED);
+}
+
+.contact-link-item .chakra-icon {
+  font-size: var(--chakra-fontSizes-md); /* MODIFIED: Reduced icon size from lg to md */
+  margin-right: var(--chakra-space-1);
+  /* ADDED: Transition for icon scale */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* ADDED: Hover effect for icon within contact link */
+.contact-link-item:hover .chakra-icon {
+  transform: scale(1.25); /* Increased size by 25% on hover for better visibility */
+}
+
+.contact-link-item .chakra-text {
+  /* Responsive font size for contact text */
+  font-size: var(--chakra-fontSizes-sm); /* MODIFIED: Reduced font size from sm to md */
+  line-height: normal;
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .contact-link-item .chakra-text {
+    font-size: var(--chakra-fontSizes-sm); /* MODIFIED: Kept at sm for md+ */
+  }
+}
+
+/* Navigation HStack Styles */
+.navbar-nav-stack {
+  background-color: transparent;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  position: relative; /* Needed for absolute positioning of the bubble */
+}
+
+/* The moving bubble background */
+.active-bubble {
+  position: absolute;
+  background: var(--accent-color, #63B3ED);
+  border-radius: var(--chakra-radii-md);
+  z-index: 0;
+}
+
+
+/* Responsive Nav Stack Justify and Spacing */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-nav-stack {
+    justify-content: center;
+    gap: var(--chakra-space-2);
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-nav-stack {
+    justify-content: flex-end;
+    gap: var(--chakra-space-4);
+  }
+}
+
+/* Individual Navigation Button Styles */
+.navbar-nav-button {
+  border-radius: var(--chakra-radii-md);
+  border: 1px solid;
+  position: relative; /* Ensure buttons are above the bubble */
+  z-index: 1; /* Ensure buttons are above the bubble */
+}
+
+/* Responsive Nav Button Padding & Font Size */
+@media screen and (min-width: 0em) { /* base */
+  .navbar-nav-button {
+    padding-left: var(--chakra-space-3);
+    padding-right: var(--chakra-space-3);
+    padding-top: var(--chakra-space-2);
+    padding-bottom: var(--chakra-space-2);
+    font-size: var(--chakra-fontSizes-sm);
+  }
+}
+
+@media screen and (min-width: 48em) { /* md (768px) */
+  .navbar-nav-button {
+    padding-left: var(--chakra-space-5);
+    padding-right: var(--chakra-space-5);
+    padding-top: var(--chakra-space-3);
+    padding-bottom: var(--chakra-space-3);
+    font-size: var(--chakra-fontSizes-md);
+  }
+}
