@@ -1,12 +1,12 @@
 // src/App.tsx
-import { useEffect, useState } from 'react'; // Import useRef
+import { useEffect, useState } from 'react'; // Removed useRef
 import { Box, Flex, Text as ChakraText, Tooltip, Icon } from '@chakra-ui/react';
 import Navbar from "./components/Navbar/Navbar";
-import About from "./components/About/About"; // Correct import path for About component
-import Skills from "./components/Skills/Skills"; // Correct import path for Skills component
-import Projects from "./components/Projects/Projects"; // Correct import path for Projects component
-import Profile from "./components/Profile/Profile"; // Correct import path for Profile component
-import Footer from "./components/Footer/Footer"; // Correct import path for Footer component
+import About from "./components/About/About";
+import Skills from "./components/Skills/Skills";
+import Projects from "./components/Projects/Projects";
+import Profile from "./components/Profile/Profile";
+import Footer from "./components/Footer/Footer";
 import Contact from './components/Contact/Contact'; // Ensure Contact is imported
 
 // Firebase Imports
@@ -22,25 +22,28 @@ function App() {
 
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
 
-  
+  // Removed: activeSection state and related refs/Intersection Observer
+  // For GitHub Pages, we'll simplify active state management in Navbar itself,
+  // or rely on URL hash for basic highlighting.
 
-  // REMOVED: Refs for each section (aboutRef, skillsRef, projectsRef, profileRef, contactRef)
-  // REMOVED: Intersection Observer useEffect hook
+  // Firebase Configuration (HARDCODED FOR GITHUB PAGES)
+  // WARNING: These keys will be publicly visible in your deployed code.
+  // Ensure your Firebase Security Rules are strict.
+  const firebaseConfig = {
+    apiKey: "AIzaSyD0VHP09h1FHIRg1Pi1Cf1K3lZS--L9cj4", // REPLACE with your actual API Key
+    authDomain: "keerthana-1d8ca.firebaseapp.com",
+    projectId: "keerthana-1d8ca",
+    storageBucket: "keerthana-1d8ca.firebasestorage.app",
+    messagingSenderId: "37842937096",
+    appId: "1:37842937096:web:2be18e48a41fd5518538bd",
+    measurementId: "G-ZE8H33PCCW"
+  };
 
   // Firebase Initialization
   useEffect(() => {
     try {
-      const firebaseConfig = {
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-        appId: import.meta.env.VITE_FIREBASE_APP_ID,
-      };
-
       if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.authDomain) {
-        console.error("Firebase config environment variables not fully set (missing API Key, Project ID, or Auth Domain). Visitor tracking will not work.");
+        console.error("Firebase config is incomplete. Visitor tracking will not work.");
         return;
       }
 
@@ -81,7 +84,7 @@ function App() {
 
   return (
     <Box minH="100vh" bg={pageBackgroundColor} position="relative">
-      {/* MODIFIED: Removed activeItem and setActiveItem props */}
+      {/* Navbar no longer receives activeItem/setActiveItem from App */}
       <Navbar />
 
       <Tooltip label={`Visitors: ${visitorCount !== null ? visitorCount : 'Loading...'}`} hasArrow placement="bottom-end">
@@ -118,7 +121,7 @@ function App() {
         pt={{ base: "100px", md: "80px", lg: "70px" }}
         color={pagePrimaryTextColor}
       >
-        {/* REMOVED: ref={aboutRef} etc. from section components */}
+        {/* Section components no longer receive ref */}
         <About />
         <Skills />
         <Projects />

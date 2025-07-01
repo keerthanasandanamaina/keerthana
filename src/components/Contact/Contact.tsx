@@ -5,18 +5,18 @@ import {
   Heading,
   Text,
   VStack,
-  FormControl, // Form components
+  FormControl,
   FormLabel,
   Input,
   Textarea,
   Button,
-  useToast, // For feedback messages
+  useToast,
   useBreakpointValue,
   type ResponsiveValue,
 } from '@chakra-ui/react';
-import { FaPaperPlane } from 'react-icons/fa'; // Import email and send icon
+import { FaPaperPlane } from 'react-icons/fa';
 
-// MODIFIED: Declare module augmentation for React.CSSProperties
+// Declare module augmentation for React.CSSProperties
 declare module 'react' {
   interface CSSProperties {
     '--rotateX'?: string;
@@ -25,21 +25,20 @@ declare module 'react' {
 }
 
 // Define colors based on your preferred dark theme palette
-const primaryTextColor = "#E2E8F0"; // Soft white/light gray for main text
-const secondaryTextColor = "#A0AEC0"; // Medium gray for subtle text
-const accentColor = "#63B3ED"; // Bright blue for highlights/icons
-const inputBorderColor = "rgba(255, 255, 255, 0.3)"; // Subtle border for inputs
-const inputFocusBorderColor = accentColor; // Accent color on focus
+const primaryTextColor = "#E2E8F0";
+const secondaryTextColor = "#A0AEC0";
+const accentColor = "#63B3ED";
+const inputBorderColor = "rgba(255, 255, 255, 0.3)";
+const inputFocusBorderColor = accentColor;
 
 // MODIFIED: Wrap component with forwardRef to accept ref from App.tsx
-const Contact = React.forwardRef((_props) => {
+const Contact = React.forwardRef((_props, ref: React.ForwardedRef<HTMLDivElement>) => {
   type TextAlign = "left" | "center" | "right" | "justify" | undefined;
   const textAlign: ResponsiveValue<TextAlign> = useBreakpointValue({ base: 'center', md: 'center' });
   const headingAlign: ResponsiveValue<TextAlign> = useBreakpointValue({ base: 'center', md: 'center' });
 
-  const toast = useToast(); // Initialize Chakra UI toast for feedback
+  const toast = useToast();
 
-  // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,20 +46,21 @@ const Contact = React.forwardRef((_props) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // MODIFIED: Form submission endpoint now points to your Netlify Function
-  const formSubmissionEndpoint = "/api/contact-form"; // This is the endpoint for your Netlify Function
+  // MODIFIED: Form submission endpoint now points directly to Formspree
+  // WARNING: This Formspree hash will be publicly visible in your deployed code.
+  const formspreeEndpoint = "https://formspree.io/f/movwrkvg"; // REPLACE WITH YOUR ACTUAL FORMSPREE FORM HASH
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => { // Explicitly type event
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: React.FormEvent) => { // Explicitly type event
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // MODIFIED: Send data to your Netlify Function endpoint
-      const response = await fetch(formSubmissionEndpoint, {
+      // MODIFIED: Send data directly to Formspree endpoint
+      const response = await fetch(formspreeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,12 +78,11 @@ const Contact = React.forwardRef((_props) => {
           isClosable: true,
           position: "top-right",
         });
-        setFormData({ name: '', email: '', message: '' }); // Clear form
+        setFormData({ name: '', email: '', message: '' });
       } else {
-        // Handle errors from the Netlify Function or Formspree
         const data = await response.json();
-        const errorMessage = data.message || "Something went wrong. Please try again.";
-        console.error("Form submission failed:", data);
+        const errorMessage = data.errors ? data.errors.map((err: { message: string }) => err.message).join(', ') : "Something went wrong. Please try again.";
+        console.error("Formspree error:", data);
         toast({
           title: "Error sending message.",
           description: errorMessage,
@@ -145,7 +144,7 @@ const Contact = React.forwardRef((_props) => {
   return (
     <Box
       id="contact"
-      // ref={ref}
+      ref={ref}
       className="contact-section-container"
       color={primaryTextColor}
       style={{
