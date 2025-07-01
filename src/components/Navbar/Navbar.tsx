@@ -35,7 +35,7 @@ const Navbar = () => {
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
     { label: "Profile Section", href: "#profile" },
-    { label: "Resume", href: "/Keerthana_Sandanamaina_Resume.pdf", isDownload: true },
+    { label: "Resume", href: `${import.meta.env.BASE_URL}Keerthana_Sandanamaina_Resume.pdf`, isDownload: true },
   ];
 
   const [activeItem, setActiveItem] = React.useState("");
