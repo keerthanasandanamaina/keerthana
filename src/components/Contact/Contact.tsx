@@ -32,7 +32,7 @@ const inputBorderColor = "rgba(255, 255, 255, 0.3)"; // Subtle border for inputs
 const inputFocusBorderColor = accentColor; // Accent color on focus
 
 // MODIFIED: Wrap component with forwardRef to accept ref from App.tsx
-const Contact = React.forwardRef((_props, ref) => {
+const Contact = React.forwardRef((_props) => {
   type TextAlign = "left" | "center" | "right" | "justify" | undefined;
   const textAlign: ResponsiveValue<TextAlign> = useBreakpointValue({ base: 'center', md: 'center' });
   const headingAlign: ResponsiveValue<TextAlign> = useBreakpointValue({ base: 'center', md: 'center' });
@@ -145,7 +145,7 @@ const Contact = React.forwardRef((_props, ref) => {
   return (
     <Box
       id="contact"
-      ref={ref}
+      // ref={ref}
       className="contact-section-container"
       color={primaryTextColor}
       style={{

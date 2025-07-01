@@ -1,13 +1,13 @@
 // src/App.tsx
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react'; // Import useRef
 import { Box, Flex, Text as ChakraText, Tooltip, Icon } from '@chakra-ui/react';
 import Navbar from "./components/Navbar/Navbar";
-import About from "./components/About/About";
-import Skills from "./components/Skills/Skills";
-import Projects from "./components/Projects/Projects";
-import Profile from "./components/Profile/Profile";
-import Footer from "./components/Footer/Footer";
-import Contact from './components/Contact/Contact';
+import About from "./components/About/About"; // Correct import path for About component
+import Skills from "./components/Skills/Skills"; // Correct import path for Skills component
+import Projects from "./components/Projects/Projects"; // Correct import path for Projects component
+import Profile from "./components/Profile/Profile"; // Correct import path for Profile component
+import Footer from "./components/Footer/Footer"; // Correct import path for Footer component
+import Contact from './components/Contact/Contact'; // Ensure Contact is imported
 
 // Firebase Imports
 import { initializeApp } from 'firebase/app';
@@ -19,53 +19,13 @@ function App() {
   const pageBackgroundColor = "#1A202C";
   const pagePrimaryTextColor = "#E2E8F0";
   const secondaryTextColor = "#A0AEC0";
-  const accentColor = "#63B3ED";
 
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
-  // REMOVED: const [db, setDb] = useState<any>(null);
-  // REMOVED: const [auth, setAuth] = useState<any>(null);
-  // REMOVED: const [appId, setAppId] = useState<string>('');
 
-  const [activeSection, setActiveSection] = useState('About');
+  
 
-  // Refs for each section
-  // MODIFIED: Explicitly type refs to HTMLDivElement
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const profileRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
-
-  // Intersection Observer to track active section
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    if (aboutRef.current) observer.observe(aboutRef.current);
-    if (skillsRef.current) observer.observe(skillsRef.current);
-    if (projectsRef.current) observer.observe(projectsRef.current);
-    if (profileRef.current) observer.observe(profileRef.current);
-    if (contactRef.current) observer.observe(contactRef.current);
-
-    return () => {
-      if (aboutRef.current) observer.unobserve(aboutRef.current);
-      if (skillsRef.current) observer.unobserve(skillsRef.current);
-      if (projectsRef.current) observer.unobserve(projectsRef.current);
-      if (profileRef.current) observer.unobserve(profileRef.current);
-      if (contactRef.current) observer.unobserve(contactRef.current);
-    };
-  }, []);
+  // REMOVED: Refs for each section (aboutRef, skillsRef, projectsRef, profileRef, contactRef)
+  // REMOVED: Intersection Observer useEffect hook
 
   // Firebase Initialization
   useEffect(() => {
@@ -87,9 +47,6 @@ function App() {
       const app = initializeApp(firebaseConfig);
       const firestoreDb = getFirestore(app);
       const firebaseAuth = getAuth(app);
-
-      // Removed: setDb(firestoreDb); setAuth(firebaseAuth); setAppId(...)
-      // firestoreDb and firebaseAuth are used directly in setupVisitorTracking
 
       const setupVisitorTracking = async () => {
         try {
@@ -124,7 +81,8 @@ function App() {
 
   return (
     <Box minH="100vh" bg={pageBackgroundColor} position="relative">
-      <Navbar activeItem={activeSection} setActiveItem={setActiveSection} />
+      {/* MODIFIED: Removed activeItem and setActiveItem props */}
+      <Navbar />
 
       <Tooltip label={`Visitors: ${visitorCount !== null ? visitorCount : 'Loading...'}`} hasArrow placement="bottom-end">
         <Box
@@ -160,12 +118,12 @@ function App() {
         pt={{ base: "100px", md: "80px", lg: "70px" }}
         color={pagePrimaryTextColor}
       >
-        {/* Pass ref to each section */}
-        <About ref={aboutRef} />
-        <Skills ref={skillsRef} />
-        <Projects ref={projectsRef} />
-        <Profile ref={profileRef} />
-        <Contact ref={contactRef} />
+        {/* REMOVED: ref={aboutRef} etc. from section components */}
+        <About />
+        <Skills />
+        <Projects />
+        <Profile />
+        <Contact />
         <Footer />
       </Flex>
     </Box>
